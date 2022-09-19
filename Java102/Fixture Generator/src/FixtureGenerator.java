@@ -14,6 +14,11 @@ public class FixtureGenerator {
 
     public void createFixture() {
 
+        if (this.teamList.size() % 2 != 0) {
+
+            this.teamList.add("Bay");
+        }
+
         int firstTeamIndex;
         int secondTeamIndex;
         int matchCounter;

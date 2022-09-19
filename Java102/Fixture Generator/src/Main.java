@@ -12,6 +12,7 @@ public class Main {
         teams.add("Beşiktaş");
         teams.add("Başakşehir");
         teams.add("Trabzonspor");
+        teams.add("Ankaragücü");
 
 
         FixtureGenerator fixtureGenerator = new FixtureGenerator(teams);
