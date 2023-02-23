@@ -81,6 +81,7 @@ public class EditCourseGUI extends JFrame{
 
             Lesson lesson = null;
             Statement st= null;
+            
             try {
                 st = DBConnector.getInstance().createStatement();
                 ResultSet rs= st.executeQuery("SELECT * FROM lesson WHERE id = " + selected_lesson_id);
