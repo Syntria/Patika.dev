@@ -1,6 +1,7 @@
 package com.patikadev.Model;
 
 import com.patikadev.Helper.DBConnector;
+import com.patikadev.Helper.Helper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,8 @@ public class Lesson {
     private String link;
 
     private Course course;
+
+    public Lesson() {};
 
     public Lesson(int id, String title, String description, String link, int course_id) {
         this.id = id;
@@ -64,6 +67,46 @@ public class Lesson {
             e.printStackTrace();
         }
         return courseList;
+    }
+
+    public static boolean update(int id, String title, String description, String link){
+        String query = "UPDATE lesson SET title=?,description=?,link=? WHERE id=?";
+
+        try {
+            PreparedStatement pr = DBConnector.getInstance().prepareStatement(query);
+            pr.setString(1,title);
+            pr.setString(2,description);
+            pr.setString(3,link);
+            pr.setInt(4,id);
+            return pr.executeUpdate() !=-1;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static Lesson getFetch(int id){
+        Lesson lesson=null;
+        String query="SELECT * FROM lesson WHERE id =?";
+
+        try {
+            PreparedStatement pr = DBConnector.getInstance().prepareStatement(query);
+            pr.setInt(1,id);
+            ResultSet rs=pr.executeQuery();
+            if (rs.next()){
+                lesson=new Lesson();
+                lesson.setId(rs.getInt("id"));
+                lesson.setTitle(rs.getString("title"));
+                lesson.setDescription(rs.getString("description"));
+                lesson.setCourse_id(rs.getInt("course_id"));
+                //lesson.setType(rs.getString("type")); lesson.setCourse gerekli mi??
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lesson;
     }
 
     public int getId() {

@@ -67,7 +67,6 @@ public class EducatorGUI extends JFrame{
                 Statement st= null;
                 try {
                     st = DBConnector.getInstance().createStatement();
-                    System.out.println(selectedCourse_id);
                     ResultSet rs= st.executeQuery("SELECT * FROM course WHERE id = " + selectedCourse_id);
                     if (rs.next()){
                         course = new Course(rs.getInt("id"),rs.getInt("user_id"),rs.getInt("patika_id"),
